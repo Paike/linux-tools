@@ -1,0 +1,28 @@
+#!/bin/bash
+
+HOST=""
+USERNAME=""
+KEYFILE=""
+PORT=22
+
+SOURCE="$1"
+DESTINATION="$2"
+
+
+if [ -z ${DESTINATION} ]
+then
+        DESTINATION="$( echo $PWD )"
+fi
+
+if [ -z $1 ]
+then
+        echo " "
+        echo "$0: Illegal arguments."
+        echo " "
+        echo "Syntax:"
+        echo "$0 sourcepath destinationpath"
+        exit 1
+fi
+
+
+rsync --ignore-existing -avzA -e "ssh -p${PORT} -i ${KEYFILE}" ${USERNAME}@${HOST}:${SOURCE} ${DESTINATION}
