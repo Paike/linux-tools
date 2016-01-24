@@ -1,0 +1,18 @@
+#!/bin/bash
+
+HOST=""
+USERNAME=""
+KEYFILE=""
+PORT=22
+VERBOSE=no
+DESTINATION="$1"
+
+
+if [ -z ${DESTINATION} ]
+then
+        DESTINATION="$( echo $PWD )"
+fi
+
+
+echo "${HOST}${DESTINATION}"
+ssh -p${PORT} -i ${KEYFILE} ${USERNAME}@${HOST} ls ${DESTINATION} -l
